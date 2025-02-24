@@ -171,7 +171,7 @@ const config = {
             position: "right",
           },
           {
-            href: "https:/ariaf.my.id",
+            href: "https://ariaf.my.id",
             label: "ariaf.my.id",
             position: "right",
           },
