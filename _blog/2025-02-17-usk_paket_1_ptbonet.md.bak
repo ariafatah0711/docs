@@ -1,0 +1,70 @@
+# USK Paket 1 Pt Bonet
+
+## topologi
+![alt text](<docs/images/Diagram Tanpa Judul.drawio.png>)
+
+<!-- truncate -->
+
+### 1. mikrotik
+### 2. proxmox
+
+## konfigurasi mikrotik
+### 1. setup internet, ip address, dhcp-server
+#### a. ubah identity router
+![alt text](docs/images/image-2.png)
+
+#### b. buat ip dhcp-client ke ether 1 untuk internet
+![alt text](docs/images/image.png)
+
+#### c. buat ip address di interface ether2, dan ether3
+![alt text](docs/images/image-1.png)
+
+#### d. vrerfifikasi apakah sudah bisa ping ke internet, dan ping ke server proxmox local
+![alt text](docs/images/image-3.png)
+
+#### e. buat firewall nat untuk internet ke ether 1 dan bypass untuk client akses ke vm proxmox
+![alt text](docs/images/image-4.png)
+
+#### f. buat hospot di interface lokal (ether3)
+dengan option:
+- interface=ether3 (lokal) \
+  ![alt text](docs/images/image-5.png)
+- address_of_local=192.168.0.1/24 \
+  ![alt text](docs/images/image-6.png)
+- address_pool=192.168.0.2-192.168.0.100 \
+  ![alt text](docs/images/image-7.png)
+- dns server: 192.168.0.1 (gateway), dan dns 8.8.8.8 untuk internet \
+  ![alt text](docs/images/image-8.png)
+- dns name untuk ketika login hospot dengan domain login.usk-tkj.net **(opsional)** \
+  ![alt text](docs/images/image-9.png)
+- disable cookie server hospot agar ....... (bantu chat gpt)
+  ![alt text](docs/images/image-10.png)
+
+#### i. buat user untuk mengatur bandwith dan memasukan ke address list
+- buat user profile dengan nama staff, dan public, dengan bandiwth 2m up/down untuk guest dan 5m untuk staf, dan buat address list
+  ![alt text](docs/images/image-11.png)
+- buat users staff dan guest di assign ke profil staff dan public
+  ![alt text](docs/images/image-12.png)
+- jika sudah verifikasi login dan test bandwith untuk user staff
+  ![alt text](docs/images/image-13.png)
+  ![alt text](docs/images/image-14.png)
+- lakukan verifikasi juga terhadap user guest untuk mengetest bandwithnya
+  ![alt text](docs/images/image-15.png)
+
+### j. buat firewall untuk membatasi user hospot guest tidak bisa mengakses server promxox
+- tambahkan firewall dengan chain forward, dan dst address ke 10.1.10.0/24
+  ![alt text](docs/images/image-16.png)
+- tambahkan src-address-list dari address list guest
+  ![alt text](docs/images/image-17.png)
+- dan action drop untuk memblokir guest yang ingin megnakses ke server vm
+  ![alt text](docs/images/image-18.png)
+- dan verifikasikan ketika login dengan user staff bahwa dia masih bisa ngeping ke 8 .8.8.8, dan 10.1.10.2
+  ![alt text](docs/images/image-19.png)
+- verifikasikan juga ketika login dengna use guest dia tidak bisa ping ke vm proxmox
+  ![alt text](docs/images/image-20.png)
+
+### k. tambahkan dns static, untuk lookup ke vm 1 dam vm2
+- aktifkan allow remote request, dan tambahkan dns server vm 1
+  ![alt text](docs/images/image-21.png)
+- tambahkan dns static ukk-tkj.net, ftp.ukk-tkj,net ke vm 1, dan www.ukk-tkj.net ke vm 2
+  ![alt text](docs/images/image-22.png)

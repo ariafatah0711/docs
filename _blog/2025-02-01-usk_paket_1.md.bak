@@ -1,0 +1,186 @@
+---
+slug: USK PAKET 1
+title: installasi usk paket 1
+authors: [ariafatah0711]
+tags: [smk_harbas]
+---
+
+# install paket 1
+
+## Panduan Setup PrestaShop di Ubuntu
+
+Panduan ini akan membantu Anda menginstal dan mengonfigurasi PrestaShop di server Ubuntu.
+
+---
+
+## Persyaratan
+- Sistem operasi Ubuntu (direkomendasikan versi LTS).
+- Akses root atau pengguna dengan hak akses `sudo`.
+
+---
+
+## Langkah 1: Update dan Upgrade Sistem
+Pastikan sistem Anda sudah diperbarui:
+
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
+```
+
+---
+
+## Langkah 2: Instal Paket yang Diperlukan
+Instal Apache, MySQL, PHP, dan paket pendukung lainnya:
+
+```bash
+sudo apt install apache2 mysql-server php unzip -y
+```
+
+---
+
+## Langkah 3: Download dan Ekstrak PrestaShop
+Masuk ke direktori web root:
+
+```bash
+cd /var/www/html
+```
+
+Hapus file default (jika ada):
+
+```bash
+sudo rm -rf ./
+```
+
+Download PrestaShop versi terbaru:
+
+```bash
+sudo wget https://github.com/PrestaShop/PrestaShop/releases/download/8.2.0/prestashop_8.2.0.zip
+```
+
+Ekstrak file PrestaShop:
+
+```bash
+sudo unzip prestashop_8.2.0.zip
+sudo rm index.php
+sudo unzip prestashop.zip
+```
+
+<!-- truncate -->
+
+---
+
+## Langkah 4: Atur Izin dan Kepemilikan
+Atur kepemilikan file ke user `www-data`:
+
+```bash
+sudo chown -R www-data:www-data /var/www/html/
+```
+
+Atur izin file:
+
+```bash
+sudo chmod -R 755 /var/www/html/
+```
+
+---
+
+## Langkah 5: Restart Apache
+Restart layanan Apache untuk menerapkan perubahan:
+
+```bash
+sudo systemctl restart apache2
+```
+
+---
+
+## Langkah 6: Instal Ekstensi PHP yang Diperlukan
+Instal ekstensi PHP yang dibutuhkan oleh PrestaShop:
+
+```bash
+sudo apt install php-zip php-xml php-curl php-gd php-mysql php-intl php-mbstring -y
+```
+
+---
+
+## Langkah 7: Aktifkan Mod Rewrite di Apache
+Aktifkan mod rewrite untuk mendukung URL yang ramah SEO:
+
+```bash
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+```
+
+---
+
+## Langkah 8: Konfigurasi Database MySQL
+Mulai layanan MySQL:
+
+```bash
+sudo systemctl start mysql
+```
+
+Jalankan `mysql_secure_installation` untuk mengamankan MySQL:
+
+```bash
+sudo mysql_secure_installation
+```
+
+Masuk ke MySQL sebagai root:
+
+```bash
+sudo mysql -u root -p
+```
+
+Buat database dan pengguna untuk PrestaShop:
+
+```sql
+CREATE DATABASE prestashop;
+CREATE USER 'aria'@'%' IDENTIFIED BY '123';
+GRANT ALL PRIVILEGES ON prestashop.* TO 'aria'@'%';
+FLUSH PRIVILEGES;
+```
+
+---
+
+## Langkah 9: Selesaikan Instalasi via Browser
+Buka browser dan akses alamat IP server Anda (contoh: `http://your-server-ip`).
+
+Ikuti langkah-langkah instalasi PrestaShop:
+- Masukkan informasi database yang telah dibuat.
+- Konfigurasi toko (nama toko, email, dll.).
+
+---
+
+## Langkah 10: Keamanan Setelah Instalasi
+Hapus folder `install`:
+
+```bash
+sudo rm -rf /var/www/html/install/
+```
+
+Ubah nama folder `admin` untuk keamanan:
+
+```bash
+sudo mv /var/www/html/admin /var/www/html/admin-ukk2025
+```
+
+---
+
+## Troubleshooting
+
+**Error: `libicuuc.so.66: cannot open shared object file: Permission denied`**
+
+Jika Anda mengalami error ini, pastikan izin file library sudah benar:
+
+```bash
+sudo chmod 755 /usr/lib/x86_64-linux-gnu/libicuuc.so.66
+```
+
+---
+
+## Referensi
+- [Repositori Resmi PrestaShop](https://github.com/PrestaShop/PrestaShop)
+- [Dokumentasi PrestaShop](https://devdocs.prestashop.com/)
+
+Dengan mengikuti panduan ini, Anda seharusnya dapat menginstal dan mengonfigurasi PrestaShop dengan sukses. Jika ada masalah, silakan merujuk ke dokumentasi resmi atau komunitas PrestaShop.
+
+
