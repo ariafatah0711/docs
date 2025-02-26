@@ -78,7 +78,8 @@
      - `www.usk-tkj.net` → Mengarah ke VM2
    ![Konfigurasi DNS Statis](docs/images/image-28.png)
 
-### 5. Konfigurasi VM
+## C. Konfigurasi vm proxmox
+### 1. setup hostname, dan ip
 #### a. Setup Hostname dan IP
 - Di sini saya menggunakan VM 201 dan VM 202.  
   ![Konfigurasi VM](docs/images/image-31.png)
@@ -97,8 +98,7 @@
   - **VM2 (202)**: 10.1.10.107/24, dengan gateway 10.1.10.105, dan DNS server 10.1.10.105.  
     ![Konfigurasi IP VM2](docs/images/image-33.png)
 
-## C. Konfigurasi vm proxmox
-### 1. setup vm, dan repository
+### 2. setup repository
 #### a. Mematikan Repository Online
 Buka file konfigurasi repository:
 ```bash
@@ -141,7 +141,7 @@ yum repolist
 ![alt text](docs/images/image-36.png)
 Lakukan langkah ini di kedua VM.
 
-### 2. konfigurasi ssh-key
+### 3. konfigurasi ssh-key
 Konfigurasi SSH Key dan PuTTYgen untuk Remote Access menggunakan OpenSSH dan PuTTY, serta Konfigurasi FTP Server
 #### a. Membuat SSH Key
 1. **Generate SSH Key dari VM 1**
@@ -175,7 +175,7 @@ Konfigurasi SSH Key dan PuTTYgen untuk Remote Access menggunakan OpenSSH dan PuT
    - **`id_rsa.ppk`** → Digunakan untuk koneksi dengan PuTTY
    ![Dua Private Key](docs/images/image-42.png)
 
-### 3. konfigurasi ftp server
+### 4. konfigurasi ftp server
 #### a. Membuat FTP Server pada VM 1 dan Mengunggah Private Key
 1. **Instalasi Paket**
   Jalankan perintah berikut untuk menginstal paket yang diperlukan:
@@ -220,7 +220,7 @@ Konfigurasi SSH Key dan PuTTYgen untuk Remote Access menggunakan OpenSSH dan PuT
   ![Upload dengan SCP](docs/images/image-45.png)
   Setelah selesai, file private key akan tersedia di direktori `/var/ftp` pada FTP server.
 
-### 4. Pengujian Login SSH
+### 5. Pengujian Login SSH
 #### a. Menggunakan OpenSSH
 - Gunakan opsi `-i id_rsa` saat melakukan SSH:
   ```bash
@@ -238,7 +238,7 @@ Konfigurasi SSH Key dan PuTTYgen untuk Remote Access menggunakan OpenSSH dan PuT
 5. Coba login melalui sesi PuTTY, seharusnya dapat masuk tanpa memasukkan password.
    ![Berhasil Login](docs/images/image-50.png)
 
-### 3. konfigurasi web server
+### 6. konfigurasi web server
 #### a. buat container vm dengan podman
 - installasi package
   ```bash
