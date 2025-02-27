@@ -1,4 +1,4 @@
-# dhcp Snooping mikrotik (lupa)
+# dhcp Snooping mikrotik (citraweb)
 
 ## **Pendahuluan**
 Dynamic Host Configuration Protocol (DHCP) adalah fitur pada RouterOS MikroTik yang terdiri dari dua bagian utama, yaitu **DHCP Server** dan **DHCP Client**. DHCP Server berfungsi untuk mendistribusikan konfigurasi jaringan ke client secara otomatis, termasuk **IP Address, Netmask, Gateway, DNS**, dan lain-lain. Penggunaan DHCP bertujuan agar administrator tidak perlu melakukan pengaturan jaringan secara manual pada setiap client.

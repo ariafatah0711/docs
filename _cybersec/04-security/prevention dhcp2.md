@@ -1,4 +1,4 @@
-# prevention dhcp mikrotik (lupa)
+# prevention dhcp mikrotik (web)
 
 **Oleh: Oki Reganoto**
 
