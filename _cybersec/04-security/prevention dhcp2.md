@@ -1,4 +1,8 @@
-# prevention dhcp mikrotik (web)
+---
+sidebar_position: 3
+---
+
+# prevention dhcp mikrotik
 
 **Oleh: Oki Reganoto**
 
@@ -91,3 +95,6 @@ Untuk memastikan perangkat hanya berkomunikasi dengan IP yang dikenal, aktifkan 
 ---
 
 Dengan menerapkan langkah-langkah di atas, Anda dapat meningkatkan keamanan jaringan Mikrotik dan mencegah DHCP rogue yang dapat membahayakan sistem.
+
+## **Referensi**
+- [MENCEGAH DHCP ROGUE di MIKROTIK](https://www.reliasolusi.com/post/mencegah-dhcp-rogue-di-mikrotik)

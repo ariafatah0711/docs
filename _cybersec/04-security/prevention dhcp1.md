@@ -1,4 +1,8 @@
-# dhcp Snooping mikrotik (citraweb)
+---
+sidebar_position: 2
+---
+
+# dhcp Snooping mikrotik
 
 ## **Pendahuluan**
 Dynamic Host Configuration Protocol (DHCP) adalah fitur pada RouterOS MikroTik yang terdiri dari dua bagian utama, yaitu **DHCP Server** dan **DHCP Client**. DHCP Server berfungsi untuk mendistribusikan konfigurasi jaringan ke client secara otomatis, termasuk **IP Address, Netmask, Gateway, DNS**, dan lain-lain. Penggunaan DHCP bertujuan agar administrator tidak perlu melakukan pengaturan jaringan secara manual pada setiap client.
@@ -22,6 +26,8 @@ Selain itu, DHCP Snooping juga mendukung **DHCP Option 82**, yang memberikan inf
 
 ## **Topologi Simulasi**
 Simulasi akan menggunakan **2 router** dan **1 perangkat switch**:
+![alt text](<images/prevention dhcp1/image.png>)
+
 - **Router 1** → Sebagai DHCP Server asli (terhubung ke switch pada port `ether2`)
 - **Router 2** → Sebagai Rogue DHCP Server (terhubung ke switch pada port acak)
 - **Switch MikroTik** → Semua port masuk ke dalam interface bridge
@@ -40,13 +46,15 @@ Jika DHCP Snooping **tidak diaktifkan**, maka client dapat menerima konfigurasi 
    - Masuk ke **menu Bridge-Port**
    - Klik dua kali pada port `ether2` yang terhubung ke DHCP Server asli
    - Centang **Trusted**
-   - Klik **Apply** lalu **OK**
+   - Klik **Apply** lalu **OK** \
+     ![alt text](<images/prevention dhcp1/image-1.png>)
 
 2. **Aktifkan DHCP Snooping dan DHCP Option 82**
    - Masuk ke **menu Bridge** → **Tab Bridge**
    - Pilih interface bridge yang digunakan
    - Centang **DHCP Snooping** dan **Add DHCP Option 82**
-   - Klik **Apply** lalu **OK**
+   - Klik **Apply** lalu **OK** \
+     ![alt text](<images/prevention dhcp1/image-2.png>)
    
    Atau bisa langsung menggunakan perintah di Terminal:
    ```bash
@@ -78,5 +86,4 @@ Dengan menerapkan metode ini, jaringan akan lebih aman dari serangan **Man-in-th
 ---
 
 ## **Referensi**
-- [Pencegahan DHCP Rogue dengan Bridge Filter](https://citraweb.com/artikel_lihat.php?id=252)
-- Dokumentasi MikroTik: [DHCP Snooping](https://help.mikrotik.com/docs/display/ROS/DHCP+Snooping)
+- [Pencegahan DHCP Rogue dengan DHCP Snooping](https://citraweb.com/artikel_lihat.php?id=389)

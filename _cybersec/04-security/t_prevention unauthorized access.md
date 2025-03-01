@@ -1,4 +1,4 @@
-# Prevention Unauthorized Access (chat gpt)
+# Prevention Unauthorized Access
 
 Unauthorized access adalah ancaman keamanan yang terjadi ketika individu yang tidak berwenang mencoba mengakses sistem atau data yang seharusnya tidak mereka miliki. Berikut adalah langkah-langkah pencegahan untuk mengamankan sistem dari akses yang tidak sah:
 

@@ -1,4 +1,4 @@
-# prevention wep (by alfian)
+# prevention wep
 
 ## Kenapa WEP Sangat Rentan?
 WEP (Wired Equivalent Privacy) menggunakan IVs (Initialization Vectors) yang dapat ditangkap dengan mudah dan dipecahkan menggunakan *aircrack-ng*. Serangan seperti *ARP replay*, *fake authentication*, dan *chopchop attack* memungkinkan peretas mendapatkan kunci WEP dalam hitungan menit.

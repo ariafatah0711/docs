@@ -1,4 +1,8 @@
-# prevention MNDP (citraweb)
+---
+sidebar_position: 4
+---
+
+# prevention MNDP Attack
 
 MNDP (Mikrotik Neighbor Discovery Protocol) merupakan protokol layer 2 dalam broadcast domain yang memungkinkan perangkat untuk menemukan perangkat lain yang juga mengaktifkan MNDP, CDP (Cisco Discovery Protocol), atau LLDP (Link Layer Discovery Protocol).
 
@@ -69,3 +73,6 @@ Hasilnya, router hanya akan menerima informasi **neighbors** dari interface yang
 Serangan MNDP Attack dapat menyebabkan gangguan besar pada jaringan, terutama dengan membanjiri tabel neighbors dan membebani CPU router. Dengan menerapkan metode di atas, jaringan dapat lebih terlindungi dari serangan berbasis **MNDP flooding**. Pastikan untuk selalu memeriksa pengaturan keamanan jaringan agar router tetap berfungsi dengan optimal.
 
 Bagaimana, cukup mudah bukan? Meskipun langkah-langkahnya sederhana, sering kali kita lupa untuk menerapkan pengamanan ini. Jadi, pastikan untuk mengamankan jaringan MikroTik dari MNDP Attack!
+
+## **Referensi**
+- [Mitigasi MNDP Attack](https://mikrotik.co.id/artikel/517/)

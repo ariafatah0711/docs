@@ -1,4 +1,4 @@
-# MITM Attack Prevention (chat gpt)
+# MITM Attack Prevention
 
 Man-in-the-Middle (MITM) attack adalah serangan di mana penyerang menyusup di antara dua pihak yang berkomunikasi untuk mencuri atau memanipulasi data. Berikut adalah langkah-langkah untuk mencegah serangan MITM:
 

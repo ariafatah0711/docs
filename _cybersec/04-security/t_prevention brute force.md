@@ -1,4 +1,4 @@
-# Prevention Brute Force Attack (chat gpt)
+# Prevention Brute Force Attack
 
 Serangan brute force adalah metode di mana penyerang mencoba berbagai kombinasi username dan password untuk mendapatkan akses ke sistem. Untuk mencegah serangan ini di dalam jaringan, berikut adalah beberapa langkah pencegahan yang dapat diterapkan:
 
