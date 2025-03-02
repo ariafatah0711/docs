@@ -1,101 +1,58 @@
-**Konsep Firewall pada Sistem Operasi Linux dan Windows**
+# ARP Attack
 
-## 1. Firewall di Linux
+## Jenis Serangan ARP
 
-### **iptables**
-#### **Konsep Dasar iptables**
-iptables adalah firewall berbasis aturan untuk sistem Linux. Ini menggunakan tabel yang berisi rantai aturan untuk mengontrol lalu lintas jaringan.
+### 1. ARP Spoofing
+**Definisi:**
+Penyerang mengirim paket ARP palsu untuk menghubungkan IP korban dengan MAC miliknya, memungkinkan penyadapan atau manipulasi lalu lintas.
 
-#### **Tabel dalam iptables:**
-- **filter**: Default, digunakan untuk menyaring lalu lintas.
-- **nat**: Digunakan untuk Network Address Translation.
-- **mangle**: Digunakan untuk memodifikasi paket.
+### 2. ARP Sniffing
+**Definisi:**
+Penyerang menangkap paket ARP untuk melihat komunikasi dalam jaringan.
 
-#### **Rantai dalam iptables:**
-- **INPUT**: Mengontrol lalu lintas masuk ke sistem.
-- **OUTPUT**: Mengontrol lalu lintas keluar dari sistem.
-- **FORWARD**: Mengontrol lalu lintas yang diteruskan antar antarmuka jaringan.
+### 3. ARP Poisoning
+**Definisi:**
+Penyerang mengirim banyak paket ARP palsu untuk merusak tabel ARP.
 
-#### **Contoh Konfigurasi iptables:**
+### 4. ARP Flooding
+**Definisi:**
+Penyerang membanjiri jaringan dengan paket ARP acak, menyebabkan overload pada switch.
+
+### 5. Proxy ARP Attack
+**Definisi:**
+Perangkat tidak sah bertindak sebagai proxy ARP, mengelabui perangkat agar mengirim lalu lintas melalui dirinya.
+
+### 6. ARP Cache Poisoning
+**Definisi:**
+Penyerang memanipulasi tabel ARP cache dengan data palsu.
+
+## Teknik Serangan dengan Bettercap
+Bettercap adalah alat yang digunakan untuk melakukan berbagai serangan jaringan, termasuk ARP Attack. Berikut beberapa tekniknya:
+
+### 1. ARP Spoofing dengan Bettercap
 ```bash
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+bettercap -iface eth0
 ```
-
-#### **Penjelasan Opsi Penting:**
-- **-p**: Menentukan protokol (tcp/udp/icmp).
-- **--dport**: Menentukan port tujuan.
-- **--sport**: Menentukan port sumber.
-- **-s**: Menentukan alamat IP sumber.
-- **-d**: Menentukan alamat IP tujuan.
-- **-m state**: Memeriksa status koneksi.
-- **-m multiport**: Mengizinkan beberapa port dalam satu aturan.
-- **-m tcp/udp**: Memfilter berdasarkan protokol tertentu.
-- **-m string**: Mendeteksi string dalam payload paket.
-- **-m limit**: Membatasi jumlah paket.
-- **-m conntrack**: Memeriksa status koneksi.
-- **-m mark**: Menandai paket.
-- **-m mac**: Memfilter berdasarkan alamat MAC.
-- **-m iprange**: Memfilter berdasarkan rentang IP.
-
-### **firewalld (firewall-cmd)**
-firewalld menggunakan konsep **zona** dan **layanan** untuk menyederhanakan pengaturan firewall.
-
-#### **Contoh Konfigurasi firewalld:**
+Lalu aktifkan modul ARP Spoofing:
 ```bash
-firewall-cmd --permanent --add-port=1000-1100/tcp
-firewall-cmd --permanent --add-port={80/tcp,443/tcp}
-firewall-cmd --add-port=8080-8090/tcp
-firewall-cmd --permanent --add-port=21/tcp
-firewall-cmd --permanent --add-service=dns
-firewall-cmd --permanent --remove-port=21/tcp
-firewall-cmd --reload
-firewall-cmd --list-ports
-firewall-cmd --new-zone=myzone
-firewall-cmd --zone=public --add-port=8080-8090/tcp --permanent
+set arp.spoof.targets 192.168.1.100
+arp.spoof on
 ```
 
-### **ufw (Uncomplicated Firewall)**
-ufw adalah firewall yang lebih mudah digunakan dibandingkan iptables.
-
-#### **Contoh Konfigurasi ufw:**
+### 2. Sniffing Paket
 ```bash
-ufw status
-ufw enable
-ufw disable
-ufw allow 23
+net.sniff on
+```
+Dengan perintah ini, Bettercap akan menangkap lalu lintas jaringan yang melewati perangkat target.
+
+### 3. Manipulasi Paket ARP
+Untuk mengarahkan trafik ke perangkat penyerang:
+```bash
+set arp.spoof.fullduplex true
+set arp.spoof.internal true
+arp.spoof on
 ```
 
----
-
-## 2. Windows Firewall with Advanced Security
-Windows Firewall memiliki tiga profil jaringan:
-- **Domain**: Untuk koneksi dalam jaringan domain.
-- **Private**: Untuk jaringan tepercaya (misalnya, rumah/kantor).
-- **Public**: Untuk jaringan umum (misalnya, Wi-Fi publik).
-
-### **Membuat Aturan Inbound dan Outbound:**
-- **Inbound**: Mengontrol lalu lintas masuk.
-- **Outbound**: Mengontrol lalu lintas keluar.
-
-#### **Menggunakan Windows Firewall melalui Command Prompt (netsh):**
-```cmd
-netsh advfirewall firewall add rule name="Allow RDP" dir=in action=allow protocol=TCP localport=3389
-```
-
----
-
-## 3. Perbandingan Firewall Linux dan Windows
-| Aspek | Linux Firewall | Windows Firewall |
-|--------|---------------|------------------|
-| Konfigurasi | Menggunakan CLI (iptables, firewalld, ufw) | GUI dan CLI (netsh, PowerShell) |
-| Fleksibilitas | Sangat fleksibel dengan aturan kustom | Lebih mudah dikonfigurasi oleh pengguna umum |
-| Keamanan | Sangat kuat, banyak opsi lanjutan | Terintegrasi dengan sistem Windows |
-| Manajemen | Kompleks, cocok untuk administrator jaringan | Lebih ramah pengguna |
-
-### **Rekomendasi Penggunaan:**
-- **iptables**: Untuk pengguna yang membutuhkan kontrol mendalam atas paket jaringan.
-- **firewalld**: Untuk server berbasis RHEL/CentOS dengan kebutuhan pengelolaan firewall yang lebih fleksibel.
-- **ufw**: Untuk pengguna Ubuntu/Debian yang ingin firewall sederhana namun efektif.
-- **Windows Firewall**: Cocok untuk lingkungan Windows dengan integrasi yang lebih baik dengan aplikasi Windows.
+## Kesimpulan
+Serangan ARP beroperasi di lapisan 2 OSI dan sering tidak terdeteksi oleh firewall biasa. Teknik seperti ARP Spoofing dan Sniffing dapat dilakukan dengan alat seperti Bettercap. Pencegahan efektif memerlukan kombinasi Static ARP, Dynamic ARP Inspection, enkripsi jaringan, serta monitoring rutin untuk keamanan jaringan.
 
