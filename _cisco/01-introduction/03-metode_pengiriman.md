@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Metode Pengiriman Data dalam Jaringan
+# Metode Pengiriman Data
 
 ## 1. Unicast
 Unicast adalah metode pengiriman (transmisi) data dalam jaringan dengan mekanisme **1 : 1** atau **PTP (Point-to-Point)**. Artinya, data dikirim dari satu alamat pengirim ke satu alamat penerima secara langsung.
