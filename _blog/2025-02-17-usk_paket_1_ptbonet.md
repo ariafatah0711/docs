@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # USK Paket 1 PT Bonet
 
 ## A. Topologi
