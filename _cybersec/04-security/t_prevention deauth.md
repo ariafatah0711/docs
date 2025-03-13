@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Prevention Deauthentication
 
 Serangan deauthentication (deauth) adalah jenis serangan yang mengeksploitasi protokol manajemen Wi-Fi untuk memutuskan koneksi pengguna dengan mengirimkan paket deauthentication palsu. Untuk mencegah serangan ini, berikut adalah beberapa metode yang dapat diterapkan:

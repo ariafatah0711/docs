@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # prevention wep
 
 ## Kenapa WEP Sangat Rentan?
