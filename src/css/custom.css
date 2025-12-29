@@ -32,3 +32,14 @@
 .navbar__link--external::after {
   display: none !important;
 }
+
+/* Scrollbar global */
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  overflow-x: hidden;
+  /* overflow-y: scroll !important; */
+  scroll-behavior: smooth;
+}
